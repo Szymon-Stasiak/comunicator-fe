@@ -1,0 +1,25 @@
+.container {
+    height: 100vh;
+    width: 100vw;
+    background-color: #ffffff;
+    display: flex;
+    gap: 10vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.square {
+    background-color: #213547;
+    border: 1px solid #e0e0e0;
+    height: 25vh;
+    width: 25vh;
+    border-radius: 4vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3vh;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1), 15px 15px 15px rgba(0, 0, 0, 0.1),
+    15px 15px 15px rgba(0, 0, 0, 0.1), 15px 15px 15px rgba(0, 0, 0, 0.1),
+    inset 1px 1px 2px #fff;
+}
+

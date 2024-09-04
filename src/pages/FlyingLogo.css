@@ -1,0 +1,21 @@
+.flying-logo{
+    position: absolute;
+    top : 2vh;
+    left: 2vw;
+    height: 10vh;
+    text-align: center;
+    color: #213547;
+    font-size: 5vh;
+    font-weight: 700;
+    display: flex;
+    gap: 0.5vh;
+    align-items: center; /* Wyrównuje tekst i obrazek w pionie */
+
+
+}
+
+.snorlax {
+    height: 100%; /* Ustaw wysokość obrazka na 100% wysokości kontenera */
+    object-fit: contain; /* Zachowuje proporcje obrazka */
+    margin-bottom: 0; /* Ustawia dolny margines na auto */
+}

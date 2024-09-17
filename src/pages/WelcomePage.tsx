@@ -1,8 +1,10 @@
-import {motion, useAnimation,} from 'framer-motion';
+import {AnimatePresence, motion, useAnimation,} from 'framer-motion';
 import './WelcomePage.css';
 import {useState} from 'react';
 import * as React from "react";
 import FlyingLogo from "./FlyingLogo";
+import LoginComponent from "./LoginComponent.tsx";
+import SignupComponent from "./SignupComponent.tsx";
 
 
 const WelcomePage = () => {
@@ -13,25 +15,26 @@ const WelcomePage = () => {
     const signupSquareAnimation = useAnimation();
 
     const handleLoginClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-        event.stopPropagation(); // Zatrzymuje propagację kliknięcia
+        event.stopPropagation();
+        AnimationStart("square square--login");
 
         setLoginIsClicked(true);
         setSignupIsClicked(false);
-        AnimationStart("square square--login");
 
     }
 
     const handleSignupClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-        event.stopPropagation(); // Zatrzymuje propagację kliknięcia
+        event.stopPropagation();
+        AnimationStart("square square--signup");
+
         setSignupIsClicked(true);
         setLoginIsClicked(false);
-        AnimationStart("square square--signup");
     }
 
     const handleContainerClick = () => {
         setSignupIsClicked(false);
         setLoginIsClicked(false);
-        ContainerAnimation();// gdy ta linijka tu jest moje animacje na klikniecie kwadratow nie dzialaja
+        ContainerAnimation();
     }
 
     const AnimationStart = (className: string) => {
@@ -91,13 +94,36 @@ const WelcomePage = () => {
         <motion.div className="container"
                     onClick={handleContainerClick}>
             <FlyingLogo/>
+            <AnimatePresence>
             <motion.div
                 className="square square--login"
                 onClick={handleLoginClick}
                 animate={loginSquareAnimation}
                 initial={{scale: 1, x: 0}}
             >
-                Login
+
+                    {loginIsClicked ? (
+                        <motion.div
+                            key="login"
+                            initial={{ opacity: 0, scale: 0.5}}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.9 }}
+                            transition={{ duration: 0.5}}
+                        >
+                            <LoginComponent />
+                        </motion.div>
+                    ) : (
+                        <motion.div
+                            key="log-button"
+                            initial={{ opacity: 0, scale: 2}}
+                            animate={{ opacity: 1 , scale: 1}}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.5}}
+                        >
+                            Log in
+                        </motion.div>
+                    )}
+
             </motion.div>
             <motion.div
                 className="square square--signup"
@@ -105,8 +131,29 @@ const WelcomePage = () => {
                 animate={signupSquareAnimation}
                 initial={{scale: 1, x: 0}}
             >
-                Signup
+                {signupIsClicked ? (
+                    <motion.div
+                        key="signup"
+                        initial={{ opacity: 0, scale: 0.5}}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.9 }}
+                        transition={{ duration: 0.5}}
+                    >
+                        <SignupComponent />
+                    </motion.div>
+                ) : (
+                    <motion.div
+                        key="signup-button"
+                        initial={{ opacity: 0, scale: 2}}
+                        animate={{ opacity: 1 , scale: 1}}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.5}}
+                    >
+                        Sign in
+                    </motion.div>
+                )}
             </motion.div>
+            </AnimatePresence>
         </motion.div>
 
     );
